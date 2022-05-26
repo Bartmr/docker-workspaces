@@ -15,7 +15,7 @@ fi
 
 mkdir -p $HOME/Downloads/chrome
 
-xhost +
+xhost +"local:docker@"
 
 set +e
 
