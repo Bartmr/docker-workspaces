@@ -24,7 +24,7 @@ START_RESULT=$?
 
 set -e
 
-if [ $INSPECT_RESULT -ne 0 ]
+if [ $START_RESULT -ne 0 ]
 then
   # Might need to use 
   # -v /dev/shm:/dev/shm \
