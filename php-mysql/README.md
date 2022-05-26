@@ -1,0 +1,6 @@
+- Start databases and infrastructure
+  - `docker-compose -f infrastructure/docker-compose.yml up`
+- Open project as a Remote Container in _VSCode_:
+  - Install the extension <https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers>
+  - Press `F1` to open command pallete
+  - Run **Remote-Containers: Open Folder in Container** and open this project's root directory

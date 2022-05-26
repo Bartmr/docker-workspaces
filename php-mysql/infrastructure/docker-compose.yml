@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  php_db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+    ports:
+      - 3306:3306
