@@ -5,7 +5,7 @@ services:
     image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=mysql
-      - MYSQL_DATABASE=mysql
+      - MYSQL_DATABASE=database
       - MYSQL_USER=mysql
       - MYSQL_PASSWORD=mysql
     ports:
