@@ -10,7 +10,7 @@ set -e
 if [ $INSPECT_RESULT -ne 0 ]
 then
   echo "Build"
-  docker build -t chrome .
+  docker build --build-arg TZ=$TZ --tag chrome .
 fi
 
 mkdir -p $HOME/Downloads/chrome
