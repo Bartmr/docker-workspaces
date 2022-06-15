@@ -9,7 +9,7 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build --build-arg TZ=$TZ --tag gimp .
+  docker build --tag gimp .
 fi
 
 mkdir -p ./data

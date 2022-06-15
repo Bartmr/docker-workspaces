@@ -9,7 +9,7 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build --build-arg TZ=$TZ --tag chrome .
+  docker build --tag chrome .
 fi
 
 mkdir -p ./data/downloads
