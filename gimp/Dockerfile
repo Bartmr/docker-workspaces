@@ -9,4 +9,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	gimp
 
+RUN groupadd -r gimp && useradd -r -g gimp -G audio,video gimp \
+	&& mkdir -p /home/gimp \
+	&& chown -R gimp:gimp /home/gimp
+
+USER gimp
+
 ENTRYPOINT [ "gimp" ]

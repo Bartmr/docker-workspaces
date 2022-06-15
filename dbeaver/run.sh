@@ -2,23 +2,23 @@
 
 # https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 
-docker inspect "chrome:latest" > /dev/null 2>&1
+docker inspect "dbeaver:latest" > /dev/null 2>&1
 LAST_RESULT=$?
 
 set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build --build-arg TZ=$TZ --tag chrome .
+  docker build --build-arg TZ=$TZ --tag dbeaver .
 fi
 
-mkdir -p ./data/downloads
+mkdir -p ./data
 
 xhost +"local:docker@"
 
 set +e
 
-docker container inspect chrome  > /dev/null 2>&1
+docker container inspect dbeaver  > /dev/null 2>&1
 LAST_RESULT=$?
 
 set -e
@@ -32,12 +32,11 @@ then
     --net host \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
-    -v $(pwd)/data/downloads:/home/chrome/Downloads \
-    -v /home/chrome/chrome-data \
+    -v $(pwd)/data:/usr/src/app \
     --device /dev/snd \
     --device /dev/dri \
-    --name chrome \
-    chrome
+    --name dbeaver \
+    dbeaver
 else
-  docker start chrome
+  docker start dbeaver
 fi
