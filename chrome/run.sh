@@ -33,7 +33,7 @@ then
     --net host \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
-    -v $(pwd)/data/downloads:/home/chrome/data \
+    -v $(pwd)/data:/home/chrome/data \
     -v /home/chrome/chrome-data \
     --device /dev/snd \
     --device /dev/dri \
