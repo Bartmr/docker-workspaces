@@ -12,7 +12,8 @@ then
   docker build --tag chrome .
 fi
 
-mkdir -p ./data/downloads
+mkdir -p ./data
+chmod go+rw ./data
 
 xhost +"local:docker@"
 
@@ -32,7 +33,7 @@ then
     --net host \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
-    -v $(pwd)/data/downloads:/home/chrome/Downloads \
+    -v $(pwd)/data/downloads:/home/chrome/data \
     -v /home/chrome/chrome-data \
     --device /dev/snd \
     --device /dev/dri \

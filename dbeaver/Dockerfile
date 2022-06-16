@@ -16,9 +16,11 @@ RUN dpkg -i dbeaver-ce_latest_amd64.deb \
   && rm dbeaver-ce_latest_amd64.deb
 
 RUN groupadd -r dbeaver && useradd -r -g dbeaver -G audio,video dbeaver \
-    && mkdir -p /home/dbeaver \
-    && chown -R dbeaver:dbeaver /home/dbeaver
+	&& mkdir -p /home/dbeaver \
+	&& chown dbeaver:dbeaver /home/dbeaver
 
 USER dbeaver
+
+WORKDIR /home/dbeaver
 
 CMD [ "dbeaver" ]

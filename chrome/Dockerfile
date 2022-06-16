@@ -22,12 +22,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Add chrome user
 RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
-    && mkdir -p /home/chrome/Downloads \
-    && mkdir -p /home/chrome/chrome-data \
-    && chown -R chrome:chrome /home/chrome
+    && mkdir -p /home/chrome \
+    && chown chrome:chrome /home/chrome
 
 # Run Chrome as non privileged user
 USER chrome
+
+WORKDIR /home/chrome
+
+RUN mkdir -p /home/chrome/chrome-data
 
 # Autorun chrome
 ENTRYPOINT [ "google-chrome" ]

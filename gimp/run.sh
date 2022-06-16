@@ -13,6 +13,7 @@ then
 fi
 
 mkdir -p ./data
+chmod go+rw ./data
 
 xhost +"local:docker@"
 
@@ -28,7 +29,7 @@ then
   docker run -d \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
-    -v $(pwd)/data:/usr/src/app \
+    -v $(pwd)/data:/home/gimp/data \
     --device /dev/dri \
     --name gimp \
     gimp
