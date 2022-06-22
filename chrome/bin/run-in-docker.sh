@@ -15,6 +15,6 @@ export XDG_CURRENT_DESKTOP=ubuntu:GNOME
 export GDMSESSION=ubuntu
 export XDG_SESSION_CLASS=user
 
-gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
+gnome-keyring-daemon --start
 
 google-chrome --user-data-dir=/home/chrome/chrome-data
