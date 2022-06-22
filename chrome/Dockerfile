@@ -34,4 +34,4 @@ WORKDIR /home/chrome
 RUN mkdir -p /home/chrome/chrome-data
 
 # Autorun chrome
-ENTRYPOINT [ "google-chrome", "--user-data-dir=/home/chrome/chrome-data", "--no-sandbox" ]
+CMD [ "/usr/src/app/bin/run-in-docker.sh" ]
