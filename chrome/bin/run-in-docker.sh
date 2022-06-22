@@ -2,9 +2,11 @@
 
 set -e
 
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
+
 export DBUS_SESSION_BUS_ADDRESS=$(dbus-daemon --session --print-address --fork)
 
-export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
+export DEBIAN_FRONTEND=gnome
 export GNOME_SHELL_SESSION_MODE=ubuntu
 export DESKTOP_SESSION=ubuntu
 export XDG_SESSION_DESKTOP=ubuntu
