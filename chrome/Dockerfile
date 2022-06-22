@@ -13,15 +13,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	ca-certificates \
 	curl \
 	gnupg \
-	--no-install-recommends \
-	&& curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	--no-install-recommends
+
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
 	&& apt-get update && apt-get install -y \
 	google-chrome-stable \
 	--no-install-recommends
 
 # Add chrome user
-RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+RUN groupadd -r chrome && useradd --system --gid chrome --groups audio,video chrome \
     && mkdir -p /home/chrome \
     && chown chrome:chrome /home/chrome
 
@@ -33,5 +34,4 @@ WORKDIR /home/chrome
 RUN mkdir -p /home/chrome/chrome-data
 
 # Autorun chrome
-ENTRYPOINT [ "google-chrome" ]
-CMD [ "--user-data-dir=/home/chrome/chrome-data", "--no-sandbox" ]
+ENTRYPOINT [ "google-chrome", "--user-data-dir=/home/chrome/chrome-data", "--no-sandbox" ]

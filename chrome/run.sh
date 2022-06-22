@@ -26,8 +26,13 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  # Might need to use 
-  # -v /dev/shm:/dev/shm \
+  # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
+  # Might need to use
+  # --shm-size=8g
+  # or
+  # -v /dev/shm:/dev/shm
+  # or
+  # --disable-dev-shm-usage
 
   docker run -d \
     --net host \
@@ -37,6 +42,7 @@ then
     -v /home/chrome/chrome-data \
     --device /dev/snd \
     --device /dev/dri \
+    --shm-size=8g \
     --name chrome \
     chrome
 else
