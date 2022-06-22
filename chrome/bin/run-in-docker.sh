@@ -15,4 +15,4 @@ export XDG_SESSION_CLASS=user
 
 gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg
 
-google-chrome --user-data-dir=/home/chrome/chrome-data --verbose
+google-chrome --user-data-dir=/home/chrome/chrome-data
