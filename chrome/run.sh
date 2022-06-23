@@ -42,6 +42,7 @@ then
     -v $(pwd)/bin:/usr/src/app/bin \
     -v $(pwd)/data:/home/chrome/data \
     -v chrome-data:/home/chrome/chrome-data \
+    -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
     --device /dev/snd \
     --device /dev/dri \
     -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \

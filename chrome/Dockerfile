@@ -22,15 +22,14 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - 
 
 # Add chrome user
 RUN groupadd -r chrome && useradd --system --gid chrome --groups audio,video chrome \
-    && mkdir -p /home/chrome \
-    && chown chrome:chrome /home/chrome
+    && mkdir -p /home/chrome/chrome-data \
+		&& mkdir -p /home/chrome/.local/share/keyrings \
+    && chown -R chrome:chrome /home/chrome
 
 # Run Chrome as non privileged user
 USER chrome
 
 WORKDIR /home/chrome
-
-RUN mkdir -p /home/chrome/chrome-data
 
 # Autorun chrome
 CMD [ "/usr/src/app/bin/run-in-docker.sh" ]

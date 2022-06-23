@@ -15,6 +15,6 @@ export XDG_CURRENT_DESKTOP=ubuntu:GNOME
 export GDMSESSION=ubuntu
 export XDG_SESSION_CLASS=user
 
-gnome-keyring-daemon --start
+eval $(gnome-keyring-daemon --start | sed -e 's/^/export /')
 
 google-chrome --user-data-dir=/home/chrome/chrome-data
