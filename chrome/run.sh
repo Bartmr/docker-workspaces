@@ -44,6 +44,7 @@ then
     -v chrome-data:/home/chrome/chrome-data \
     -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
     --device /dev/snd \
+    --volume=/run/user/$(id -u)/pulse:/run/user/999/pulse \
     --device /dev/dri \
     -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
     --shm-size=8g \

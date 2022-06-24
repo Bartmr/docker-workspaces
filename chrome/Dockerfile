@@ -27,6 +27,8 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - 
 	google-chrome-stable \
 	--no-install-recommends
 
+COPY pulse-client.conf /etc/pulse/client.conf
+
 # Add chrome user
 RUN groupadd --system chrome && useradd --system --uid 999 --gid chrome --groups audio,video chrome \
     && mkdir -p /home/chrome/chrome-data \
