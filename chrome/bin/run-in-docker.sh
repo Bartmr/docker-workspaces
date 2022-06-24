@@ -15,7 +15,9 @@ export XDG_CURRENT_DESKTOP=ubuntu:GNOME
 export GDMSESSION=ubuntu
 export XDG_SESSION_CLASS=user
 
-pulseaudio --daemonize
+set +e
+pulseaudio --start
+set -e
 
 eval $(gnome-keyring-daemon --start | sed -e 's/^/export /')
 
