@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	gtk2-engines-pixbuf gimp
 
-RUN groupadd -r gimp && useradd -r -g gimp -G audio,video gimp \
+RUN groupadd --system gimp && useradd --system --uid 999 --gid gimp gimp \
 	&& mkdir -p /home/gimp \
 	&& chown gimp:gimp /home/gimp
 

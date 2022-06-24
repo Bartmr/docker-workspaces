@@ -28,7 +28,7 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - 
 	--no-install-recommends
 
 # Add chrome user
-RUN groupadd -r chrome && useradd --system --gid chrome --groups audio,video chrome \
+RUN groupadd --system chrome && useradd --system --uid 999 --gid chrome --groups audio,video chrome \
     && mkdir -p /home/chrome/chrome-data \
 		&& mkdir -p /home/chrome/.local/share/keyrings \
     && chown -R chrome:chrome /home/chrome

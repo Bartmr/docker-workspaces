@@ -15,7 +15,7 @@ RUN wget https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
 RUN dpkg -i dbeaver-ce_latest_amd64.deb \
   && rm dbeaver-ce_latest_amd64.deb
 
-RUN groupadd -r dbeaver && useradd -r -g dbeaver -G audio,video dbeaver \
+RUN groupadd --system dbeaver && useradd --system --uid 999 --gid dbeaver dbeaver \
 	&& mkdir -p /home/dbeaver \
 	&& chown dbeaver:dbeaver /home/dbeaver
 

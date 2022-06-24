@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 #
 #
 
-RUN groupadd -r ubuntu && useradd -r -g ubuntu -G audio,video ubuntu \
+RUN groupadd --system ubuntu && useradd --system --uid 999 --gid ubuntu ubuntu \
 	&& mkdir -p /home/ubuntu \
 	&& chown ubuntu:ubuntu /home/ubuntu
 
