@@ -17,7 +17,13 @@ chmod go+rw ./data
 
 chmod go+r ~/.config/pulse/cookie
 
-pacmd "load-module module-native-protocol-unix auth-group=audio socket=/tmp/pulse-socket"
+if [ -S /tmp/pulse-socket ]
+then
+  echo "Previous PulseAudio socket available"
+else
+  echo "No PulseAudio socket available. Will create one"
+  pacmd "load-module module-native-protocol-unix auth-group=audio socket=/tmp/pulse-socket"
+fi
 
 xhost +"local:docker@"
 
