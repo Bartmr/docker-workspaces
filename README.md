@@ -2,7 +2,10 @@
 
 After knowing that saved Chrome passwords and cookies in Linux are not protected against malicious dependencies in our development environment or other apps in our system, I decided to run my core apps in Docker containers, where their data is not accessible without sudo, and a personal understanding of where stuff is being saved.
 
-Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces runs Chrome in a sandbox, encrypts passwords and cookies with the help of an also dockerized gnome-keychain, and works with pulseaudio, so you can use wired headphones (i still need to add some dependencies for it to work with bluetooth headphones).
+Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
+  - runs Chrome in a sandbox
+  - encrypts passwords and cookies with the help of an also dockerized gnome-keychain
+  - works with your headphones
 
 ## Miscellaneous
 ### Useful aliases

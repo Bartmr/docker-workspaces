@@ -15,6 +15,10 @@ fi
 mkdir -p ./data
 chmod go+rw ./data
 
+chmod go+r ~/.config/pulse/cookie
+
+pacmd "load-module module-native-protocol-unix auth-group=audio socket=/tmp/pulse-socket"
+
 xhost +"local:docker@"
 
 set +e
@@ -44,9 +48,11 @@ then
     -v chrome-data:/home/chrome/chrome-data \
     -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
     --device /dev/snd \
-    --volume=/run/user/$(id -u)/pulse:/run/user/999/pulse \
+    --volume=/tmp/pulse-socket:/tmp/pulse-socket:ro \
+    -v ~/.config/pulse/cookie:/tmp/pulseaudio_cookie:ro \
+    --group-add audio \
     --device /dev/dri \
-    -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket \
+    -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro \
     --shm-size=8g \
     --name chrome \
     chrome
