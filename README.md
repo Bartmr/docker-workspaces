@@ -1,4 +1,4 @@
-# Some of my day-to-day software.
+# Some of my day-to-day software, in Docker containers
 
 After knowing that saved Chrome passwords and cookies in Linux are not protected against malicious dependencies in our development environment or other apps in our system, I decided to run my core apps in Docker containers, where their data is not accessible without sudo, and a personal understanding of where stuff is being saved.
 
