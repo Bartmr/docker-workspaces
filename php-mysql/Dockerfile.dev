@@ -3,7 +3,7 @@ FROM php:7-fpm-buster
 RUN docker-php-ext-install mysqli \
   && docker-php-ext-enable mysqli
 
-RUN groupadd -r php && useradd -r -g php -G audio,video php \
+RUN groupadd -r php && useradd -r -g php php \
     && mkdir -p /home/php \
     && chown php:php /home/php
 
