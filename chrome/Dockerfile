@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	libcanberra-gtk-module \
 	libcanberra-gtk3-module
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	fonts-noto-color-emoji
 
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
