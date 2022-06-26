@@ -14,6 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	curl \
 	gnupg
 
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
+	&& apt-get update && apt-get install -y \
+	google-chrome-stable \
+	--no-install-recommends
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	xdg-desktop-portal \
 	xdg-desktop-portal-gtk \
@@ -23,11 +29,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	fonts-noto-color-emoji
 
-RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
-	&& apt-get update && apt-get install -y \
-	google-chrome-stable \
-	--no-install-recommends
+RUN apt-get update && apt-get install -y \
+	fonts-noto
 
 COPY pulse-client.conf /etc/pulse/client.conf
 
