@@ -14,6 +14,7 @@ fi
 
 mkdir -p ./data
 chmod go+rw ./data
+setfacl -PRdm u::rw,g::rw,o::rw ./data
 
 chmod go+r ~/.config/pulse/cookie
 
