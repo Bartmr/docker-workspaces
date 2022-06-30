@@ -16,5 +16,3 @@ USER ubuntu
 WORKDIR /home/ubuntu
 
 ENV APPIMAGE_EXTRACT_AND_RUN=1
-
-CMD [ "sleep", "infinity" ]

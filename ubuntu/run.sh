@@ -26,7 +26,7 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker run -d \
+  docker run -ti \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
     -v $(pwd)/bin:/usr/src/app/bin \
@@ -35,5 +35,5 @@ then
     --name ubuntu-with-gui \
     ubuntu-with-gui
 else
-  docker start ubuntu-with-gui
+  docker start -i ubuntu-with-gui
 fi
