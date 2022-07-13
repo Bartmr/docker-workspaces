@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
 
+ARG USER_UID
+ARG USER_GID
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
@@ -10,9 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	gtk2-engines-pixbuf gimp
 
-RUN groupadd --system gimp && useradd --system --uid 999 --gid gimp gimp \
-	&& mkdir -p /home/gimp \
-	&& chown gimp:gimp /home/gimp
+RUN groupadd --gid $USER_GID gimp && useradd  --uid $USER_UID --gid $USER_GID --create-home gimp
 
 USER gimp
 
