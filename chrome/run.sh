@@ -9,12 +9,14 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build --tag chrome .
+  docker build \
+    --build-arg USER_UID=$(id -u) \
+    --build-arg USER_GID=$(id -g) \
+    --tag chrome .
 fi
 
 mkdir -p ./data
 chmod go+rw ./data
-setfacl -PRdm u::rw,g::rw,o::rw ./data
 
 chmod go+r ~/.config/pulse/cookie
 
@@ -51,7 +53,7 @@ then
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
     -v $(pwd)/bin:/usr/src/app/bin \
-    -v $(pwd)/data:/home/chrome/data \
+    -v $(pwd)/data:/home/chrome/Downloads \
     -v chrome-data:/home/chrome/chrome-data \
     -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
     --device /dev/snd \

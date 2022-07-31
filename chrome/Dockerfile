@@ -34,11 +34,13 @@ RUN apt-get update && apt-get install -y \
 
 COPY pulse-client.conf /etc/pulse/client.conf
 
-# Add chrome user
-RUN groupadd --system chrome && useradd --system --uid 999 --gid chrome --groups audio,video chrome \
-    && mkdir -p /home/chrome/chrome-data \
-		&& mkdir -p /home/chrome/.local/share/keyrings \
-    && chown -R chrome:chrome /home/chrome
+ARG USER_UID
+ARG USER_GID
+
+RUN groupadd --gid $USER_GID chrome && useradd  --uid $USER_UID --gid $USER_GID chrome \
+	&& mkdir -p /home/chrome/chrome-data \
+	&& mkdir -p /home/chrome/.local/share/keyrings \
+	&& chown -R chrome:chrome /home/chrome
 
 # Run Chrome as non privileged user
 USER chrome
