@@ -9,10 +9,7 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build \
-    --build-arg USER_UID=$(id -u) \
-    --build-arg USER_GID=$(id -g) \
-    --tag chrome .
+  ./rebuild.sh
 fi
 
 mkdir -p ./data
