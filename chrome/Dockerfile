@@ -42,7 +42,7 @@ RUN apt-get install -y tzdata
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID chrome && useradd  --uid $USER_UID --gid $USER_GID chrome \
+RUN groupadd --gid $USER_GID chrome && useradd  --uid $USER_UID --gid $USER_GID --groups audio,video chrome \
 	&& mkdir -p /home/chrome/chrome-data \
 	&& mkdir -p /home/chrome/.local/share/keyrings \
 	&& chown -R chrome:chrome /home/chrome
