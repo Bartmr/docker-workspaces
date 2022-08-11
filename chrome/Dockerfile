@@ -7,6 +7,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 #
 #
 
+ARG CACHEBUST=1
+
+RUN echo "cache bust $CACHEBUST"
+
 # Install Chrome
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	apt-transport-https \
