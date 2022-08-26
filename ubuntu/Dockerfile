@@ -7,9 +7,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 #
 #
 
-RUN groupadd --system ubuntu && useradd --system --uid 999 --gid ubuntu ubuntu \
-	&& mkdir -p /home/ubuntu \
-	&& chown ubuntu:ubuntu /home/ubuntu
+ARG USER_UID
+ARG USER_GID
+
+RUN groupadd --gid $USER_GID ubuntu && useradd --uid $USER_UID --gid $USER_GID --create-home ubuntu
 
 USER ubuntu
 

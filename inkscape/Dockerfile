@@ -13,9 +13,10 @@ RUN add-apt-repository ppa:inkscape.dev/stable && \
 	apt-get update && apt-get install -y --no-install-recommends \
 	inkscape
 
-RUN groupadd --system inkscape && useradd --system --uid 999 --gid inkscape inkscape \
-	&& mkdir -p /home/inkscape \
-	&& chown inkscape:inkscape /home/inkscape
+ARG USER_UID
+ARG USER_GID
+
+RUN groupadd --gid $USER_GID inkscape && useradd --uid $USER_UID --gid $USER_GID --create-home inkscape
 
 USER inkscape
 

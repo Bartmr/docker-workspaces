@@ -9,7 +9,10 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build --tag ubuntu-with-gui .
+  docker build \
+    --build-arg USER_UID=$(id -u) \
+    --build-arg USER_GID=$(id -g) \
+    --tag ubuntu-with-gui .
 fi
 
 mkdir -p ./data

@@ -10,9 +10,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 RUN add-apt-repository ppa:libreoffice && apt-get update && apt-get install -y --no-install-recommends \
 	libreoffice
 
-RUN groupadd --system libreoffice && useradd --system --uid 999 --gid libreoffice libreoffice \
-	&& mkdir -p /home/libreoffice \
-	&& chown libreoffice:libreoffice /home/libreoffice
+ARG USER_UID
+ARG USER_GID
+
+RUN groupadd --gid $USER_GID libreoffice && useradd --uid $USER_UID --gid $USER_GID --create-home libreoffice
 
 USER libreoffice
 

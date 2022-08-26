@@ -22,7 +22,7 @@ RUN /usr/src/app/arduino-1.8.19/install.sh
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID arduino && useradd  --uid $USER_UID --gid $USER_GID --groups dialout --create-home arduino
+RUN groupadd --gid $USER_GID arduino && useradd --uid $USER_UID --gid $USER_GID --groups dialout --create-home arduino
 
 USER arduino
 

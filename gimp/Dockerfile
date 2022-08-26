@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID gimp && useradd  --uid $USER_UID --gid $USER_GID --create-home gimp
+RUN groupadd --gid $USER_GID gimp && useradd --uid $USER_UID --gid $USER_GID --create-home gimp
 
 USER gimp
 

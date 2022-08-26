@@ -9,7 +9,10 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build --tag libreoffice .
+  docker build \
+    --build-arg USER_UID=$(id -u) \
+    --build-arg USER_GID=$(id -g) \
+    --tag libreoffice .
 fi
 
 mkdir -p ./data

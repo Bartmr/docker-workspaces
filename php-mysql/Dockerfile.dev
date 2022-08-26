@@ -3,8 +3,6 @@ FROM php:7-fpm-buster
 RUN docker-php-ext-install mysqli \
   && docker-php-ext-enable mysqli
 
-RUN groupadd -r php && useradd -r -g php php \
-    && mkdir -p /home/php \
-    && chown php:php /home/php
+RUN groupadd --gid $USER_GID php && useradd --uid $USER_UID --gid $USER_GID --create-home php
 
 USER php

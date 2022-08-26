@@ -18,9 +18,10 @@ RUN dpkg -i dbeaver-ce_latest_amd64.deb \
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	postgresql-client
 
-RUN groupadd --system dbeaver && useradd --system --uid 999 --gid dbeaver dbeaver \
-	&& mkdir -p /home/dbeaver \
-	&& chown dbeaver:dbeaver /home/dbeaver
+ARG USER_UID
+ARG USER_GID
+
+RUN groupadd --gid $USER_GID dbeaver && useradd --uid $USER_UID --gid $USER_GID --create-home dbeaver
 
 USER dbeaver
 
