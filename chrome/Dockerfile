@@ -8,11 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 #
 
 ARG CACHEBUST=1
-
 RUN echo "cache bust $CACHEBUST"
+RUN apt-get update
+
+#
+#
 
 # Install Chrome
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
 	apt-transport-https \
 	ca-certificates \
 	curl \
@@ -24,16 +27,16 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - 
 	google-chrome-stable \
 	--no-install-recommends
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
 	xdg-desktop-portal \
 	xdg-desktop-portal-gtk \
 	libcanberra-gtk-module \
 	libcanberra-gtk3-module
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
 	fonts-noto-color-emoji
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get install -y \
 	fonts-noto
 
 COPY pulse-client.conf /etc/pulse/client.conf
