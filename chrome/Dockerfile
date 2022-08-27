@@ -18,15 +18,6 @@ RUN apt-get install -y --no-install-recommends \
 	libcanberra-gtk-module \
 	libcanberra-gtk3-module
 
-#
-#
-
-ARG CACHEBUST=1
-RUN echo "cache bust $CACHEBUST"
-
-#
-#
-
 RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 
@@ -39,12 +30,26 @@ RUN apt-get install -y \
 RUN apt-get install -y --no-install-recommends \
 	fonts-noto fonts-noto-color-emoji
 
+#
+#
+
+ARG CACHEBUST=1
+RUN echo "cache bust $CACHEBUST"
+
+RUN apt-get update && apt-get upgrade -y --no-install-recommends
+
+#
+#
+
 COPY pulse-client.conf /etc/pulse/client.conf
 
 ARG TZ
 ENV TZ=$TZ
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get install -y tzdata
+
+#
+#
 
 ARG USER_UID
 ARG USER_GID
