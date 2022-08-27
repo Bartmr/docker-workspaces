@@ -4,28 +4,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 
-#
-#
-
-ARG CACHEBUST=1
-RUN echo "cache bust $CACHEBUST"
 RUN apt-get update
 
-#
-#
-
-# Install Chrome
 RUN apt-get install -y --no-install-recommends \
 	apt-transport-https \
 	ca-certificates \
 	curl \
 	gnupg
-
-RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
-	&& apt-get update && apt-get install -y \
-	google-chrome-stable \
-	--no-install-recommends
 
 RUN apt-get install -y --no-install-recommends \
 	xdg-desktop-portal \
@@ -33,11 +18,26 @@ RUN apt-get install -y --no-install-recommends \
 	libcanberra-gtk-module \
 	libcanberra-gtk3-module
 
-RUN apt-get install -y --no-install-recommends \
-	fonts-noto-color-emoji
+#
+#
+
+ARG CACHEBUST=1
+RUN echo "cache bust $CACHEBUST"
+
+#
+#
+
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+
+RUN apt-get update
 
 RUN apt-get install -y \
-	fonts-noto
+	google-chrome-stable \
+	--no-install-recommends
+
+RUN apt-get install -y --no-install-recommends \
+	fonts-noto fonts-noto-color-emoji
 
 COPY pulse-client.conf /etc/pulse/client.conf
 
@@ -49,15 +49,13 @@ RUN apt-get install -y tzdata
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID chrome && useradd --uid $USER_UID --gid $USER_GID --groups audio,video chrome \
-	&& mkdir -p /home/chrome/chrome-data \
-	&& mkdir -p /home/chrome/.local/share/keyrings \
-	&& chown -R chrome:chrome /home/chrome
+RUN groupadd --gid $USER_GID chrome && useradd --uid $USER_UID --gid $USER_GID --groups audio,video --create-home chrome
 
-# Run Chrome as non privileged user
 USER chrome
+
+RUN mkdir -p /home/chrome/chrome-data \
+	&& mkdir -p /home/chrome/.local/share/keyrings
 
 WORKDIR /home/chrome
 
-# Autorun chrome
 CMD [ "/usr/src/app/bin/run-in-docker.sh" ]
