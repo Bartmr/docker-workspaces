@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 #
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	wget
+	wget curl
 
 RUN apt-get install -y xz-utils
 
@@ -18,6 +18,13 @@ RUN tar -xf /usr/src/app/arduino-1.8.19-linux64.tar.xz -C /usr/src/app
 
 # RUN /usr/src/app/arduino-1.8.19/arduino-linux-setup.sh
 RUN /usr/src/app/arduino-1.8.19/install.sh
+
+ENV NPM_CONFIG_PREFIX=/home/arduino/.npm-global
+ENV PATH="${PATH}:/home/arduino/.npm-global/bin"
+RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+  apt-get install -y nodejs
+
+RUN apt-get install -y build-essential
 
 ARG USER_UID
 ARG USER_GID
