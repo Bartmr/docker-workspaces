@@ -1,3 +1,6 @@
 {
-  "terminal.integrated.defaultProfile.linux": "bash"
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "rust-analyzer.linkedProjects": [
+    "data/rust/Cargo.toml"
+  ]
 }

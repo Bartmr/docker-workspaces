@@ -35,16 +35,27 @@ ARG USER_GID
 
 RUN groupadd --gid $USER_GID arduino && useradd --uid $USER_UID --gid $USER_GID --groups dialout --create-home arduino
 
-
 RUN wget -O /home/arduino/arduino-ide.AppImage https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc9.2_Linux_64bit.AppImage
 RUN chmod +x /home/arduino/arduino-ide.AppImage
 
 COPY ./arduino-ide-initial-settings.json /home/arduino/.arduinoIDE/settings.json
-RUN chown arduino:arduino /home/arduino/.arduinoIDE
+RUN chown -R arduino:arduino /home/arduino/.arduinoIDE
+
+# https://github.com/Rahix/avr-hal
+RUN apt-get install -y avr-libc gcc-avr pkg-config avrdude libudev-dev
 
 USER arduino
 WORKDIR /home/arduino
 
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --no-modify-path
+ENV PATH="/home/arduino/.cargo/bin:${PATH}"
+# https://github.com/Rahix/avr-hal
+RUN cargo +stable install ravedude
+RUN cargo install cargo-generate
+
 RUN ./arduino-ide.AppImage --appimage-extract
+
+ENV USER=arduino
+ENV RAVEDUDE_PORT=/dev/ttyACM0
 
 CMD ["/home/arduino/squashfs-root/arduino-ide", "--no-sandbox"]
