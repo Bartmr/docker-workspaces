@@ -10,14 +10,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 RUN apt-get update && apt-get install -y --no-install-recommends \
 	wget curl
 
-RUN apt-get install -y xz-utils
+# RUN apt-get install -y xz-utils
 
-RUN wget https://downloads.arduino.cc/arduino-1.8.19-linux64.tar.xz --directory-prefix=/usr/src/app
+# RUN wget https://downloads.arduino.cc/arduino-1.8.19-linux64.tar.xz --directory-prefix=/usr/src/app
 
-RUN tar -xf /usr/src/app/arduino-1.8.19-linux64.tar.xz -C /usr/src/app
+# RUN tar -xf /usr/src/app/arduino-1.8.19-linux64.tar.xz -C /usr/src/app
 
 # RUN /usr/src/app/arduino-1.8.19/arduino-linux-setup.sh
-RUN /usr/src/app/arduino-1.8.19/install.sh
+# RUN /usr/src/app/arduino-1.8.19/install.sh
+
+RUN mkdir -p /usr/src/app
+
+
 
 ENV NPM_CONFIG_PREFIX=/home/arduino/.npm-global
 ENV PATH="${PATH}:/home/arduino/.npm-global/bin"
@@ -31,8 +35,16 @@ ARG USER_GID
 
 RUN groupadd --gid $USER_GID arduino && useradd --uid $USER_UID --gid $USER_GID --groups dialout --create-home arduino
 
-USER arduino
 
+RUN wget -O /home/arduino/arduino-ide.AppImage https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc9.2_Linux_64bit.AppImage
+RUN chmod +x /home/arduino/arduino-ide.AppImage
+
+COPY ./arduino-ide-initial-settings.json /home/arduino/.arduinoIDE/settings.json
+RUN chown arduino:arduino /home/arduino/.arduinoIDE
+
+USER arduino
 WORKDIR /home/arduino
 
-CMD ["arduino"]
+RUN ./arduino-ide.AppImage --appimage-extract
+
+CMD ["/home/arduino/squashfs-root/arduino-ide", "--no-sandbox"]

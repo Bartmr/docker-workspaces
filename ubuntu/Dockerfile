@@ -15,5 +15,3 @@ RUN groupadd --gid $USER_GID ubuntu && useradd --uid $USER_UID --gid $USER_GID -
 USER ubuntu
 
 WORKDIR /home/ubuntu
-
-ENV APPIMAGE_EXTRACT_AND_RUN=1
