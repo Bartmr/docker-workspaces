@@ -9,8 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 #
 
 RUN apt-get update \
-	&& apt install -y tor torbrowser-launcher gxmessage
-
+	&& apt install -y curl wget gxmessage libdbus-glib-1-2 jq
 
 ARG USER_UID
 ARG USER_GID
@@ -21,3 +20,10 @@ USER tor
 
 WORKDIR /home/tor
 
+COPY ./bin/install-tor.sh /home/tor
+
+RUN ./install-tor.sh
+
+COPY ./bin/run-tor.sh /home/tor
+
+CMD ["./run-tor.sh"]
