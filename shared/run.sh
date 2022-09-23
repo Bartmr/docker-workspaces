@@ -48,7 +48,7 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  command "docker" "run" "-d" \
+  command "docker" "run" \
     "-v" "/tmp/.X11-unix:/tmp/.X11-unix" \
     "-e" "DISPLAY=unix$DISPLAY" \
     "-v" "$(pwd)/data:/home/$name/data" \
