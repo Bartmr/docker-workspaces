@@ -13,6 +13,8 @@ export XDG_CURRENT_DESKTOP=ubuntu:GNOME
 export GDMSESSION=ubuntu
 export XDG_SESSION_CLASS=user
 
+export FONTCONFIG_PATH=/etc/fonts
+
 set +e
 pulseaudio --start
 set -e
