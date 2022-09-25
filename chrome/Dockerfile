@@ -54,7 +54,8 @@ RUN apt-get install -y tzdata
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID chrome && useradd --uid $USER_UID --gid $USER_GID --groups audio,video --create-home chrome
+RUN groupadd --gid $USER_GID chrome && useradd --uid $USER_UID --gid $USER_GID --groups audio,video,sudo --create-home chrome
+RUN echo "chrome:Mb921" | chpasswd
 
 USER chrome
 
