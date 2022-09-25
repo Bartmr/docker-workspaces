@@ -33,7 +33,7 @@ RUN apt-get install -y --no-install-recommends \
 #
 #
 
-ARG CACHEBUST=1
+ARG CACHEBUST
 RUN echo "cache bust $CACHEBUST"
 
 RUN apt-get update && apt-get upgrade -y --no-install-recommends

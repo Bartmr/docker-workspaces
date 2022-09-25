@@ -12,3 +12,30 @@ Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
 Append these to `~/.bashrc`
 
 - `alias prune-volumes="docker volume list --filter dangling=true --format \"{{.Name}}\" | grep -v -e \"chrome-data\" -e \"chrome-keyring-data\" | xargs docker volume rm"`
+
+## Development
+
+### Useful snippets
+
+- Upgrade all packages without rebuilding the whole image and any base images that it uses
+  ```
+  ARG CACHEBUST
+  RUN echo "cache bust $CACHEBUST"
+
+  RUN apt-get update && apt-get upgrade -y --no-install-recommends
+  ```
+
+- Set timezone inside container
+  ```
+  ARG TZ
+  ENV TZ=$TZ
+  RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+  RUN apt-get install -y tzdata
+  ```
+
+- Add `sudo` to container
+  - add final user to `sudo` group
+  - set it's password
+    ```
+    RUN echo "user:password" | chpasswd
+    ```
