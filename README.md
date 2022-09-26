@@ -26,13 +26,22 @@ Append these to `~/.bashrc`
   ```
 
 - Set timezone inside container
-  ```
-  ARG TZ
-  ENV TZ=$TZ
-  RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-  RUN apt-get install -y tzdata
-  ```
-
+  - Dockerfile
+    ```
+    ARG TZ
+    ENV TZ=$TZ
+    RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    RUN apt-get install -y tzdata
+    ```
+  - When running the docker container
+    ```
+    -v /etc/timezone:/etc/timezone:ro
+    -v /etc/localtime:/etc/localtime:ro
+    ```
+  - Before starting the software inside the docker container
+    ```
+    export TZ=$(cat /etc/timezone)
+    ```
 - Add `sudo` to container
   - add final user to `sudo` group
   - set it's password

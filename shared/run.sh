@@ -34,8 +34,16 @@ then
     --tag $name "../$name"
 fi
 
+#
+#
+
+mkdir -p "../$name/bin"
+
 mkdir -p "../$name/data"
 chmod go+rw "../$name/data"
+
+#
+#
 
 xhost +"local:docker@"
 
@@ -48,13 +56,14 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  command "docker" "run" \
-    "-v" "/tmp/.X11-unix:/tmp/.X11-unix" \
-    "-e" "DISPLAY=unix$DISPLAY" \
-    "-v" "$(pwd)/data:/home/$name/data" \
-    "${run_args[@]}" \
-    "--name" $name \
+  docker run \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -e DISPLAY=unix$DISPLAY \
+    -v $(pwd)/data:/home/$name/docker-data \
+    -v $(pwd)/bin:/home/$name/docker-bin \
+    ${run_args[@]} \
+    --name $name \
     $name
 else
-  docker start $name
+  docker start $name -a
 fi

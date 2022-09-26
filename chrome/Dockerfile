@@ -64,4 +64,4 @@ RUN mkdir -p /home/chrome/chrome-data \
 
 WORKDIR /home/chrome
 
-CMD [ "/usr/src/app/bin/run-in-docker.sh" ]
+CMD [ "/home/chrome/docker-bin/run-in-docker.sh" ]

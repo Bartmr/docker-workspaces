@@ -15,6 +15,8 @@ export XDG_SESSION_CLASS=user
 
 export FONTCONFIG_PATH=/etc/fonts
 
+export TZ=$(cat /etc/timezone)
+
 set +e
 pulseaudio --start
 set -e

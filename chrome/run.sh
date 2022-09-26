@@ -2,18 +2,9 @@
 
 # https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 
-docker inspect "chrome:latest" > /dev/null 2>&1
-LAST_RESULT=$?
 
-set -e
-
-if [ $LAST_RESULT -ne 0 ]
-then
-  ./rebuild.sh
-fi
-
-mkdir -p ./data
-chmod go+rw ./data
+mkdir -p ./Downloads
+chmod go+rw ./Downloads
 
 chmod go+r ~/.config/pulse/cookie
 
@@ -25,43 +16,25 @@ else
   pacmd "load-module module-native-protocol-unix auth-group=audio socket=/tmp/pulse-socket"
 fi
 
-xhost +"local:docker@"
+# https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
+# Might need to use
+# --shm-size=8g
+# or
+# -v /dev/shm:/dev/shm
+# or
+# --disable-dev-shm-usage
 
-set +e
-
-docker container inspect chrome  > /dev/null 2>&1
-LAST_RESULT=$?
-
-set -e
-
-if [ $LAST_RESULT -ne 0 ]
-then
-  # https://developers.google.com/web/tools/puppeteer/troubleshooting#tips
-  # Might need to use
-  # --shm-size=8g
-  # or
-  # -v /dev/shm:/dev/shm
-  # or
-  # --disable-dev-shm-usage
-
-  docker run -d \
+../shared/run.sh chrome \
     --privileged \
     --net host \
-    -v /tmp/.X11-unix:/tmp/.X11-unix \
-    -e DISPLAY=unix$DISPLAY \
-    -v $(pwd)/bin:/usr/src/app/bin \
-    -v $(pwd)/data:/home/chrome/Downloads \
+    -v $(pwd)/Downloads:/home/chrome/Downloads \
     -v chrome-data:/home/chrome/chrome-data \
     -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
-    --device /dev/snd \
     --volume=/tmp/pulse-socket:/tmp/pulse-socket:ro \
     -v ~/.config/pulse/cookie:/tmp/pulseaudio_cookie:ro \
     --group-add audio \
-    --device /dev/dri \
     -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro \
+    -v /etc/timezone:/etc/timezone:ro \
+    -v /etc/localtime:/etc/localtime:ro \
     --shm-size=8g \
-    --name chrome \
-    chrome
-else
-  docker start chrome
-fi
+    --name chrome
