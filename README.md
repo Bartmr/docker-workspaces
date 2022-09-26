@@ -48,3 +48,8 @@ Append these to `~/.bashrc`
     ```
     RUN echo "user:password" | chpasswd
     ```
+
+### Links
+
+- [Using dynamically created devices (--device-cgroup-rule)](https://docs.docker.com/engine/reference/commandline/run/#-using-dynamically-created-devices---device-cgroup-rule)
+- [Access an NVIDIA GPU](https://docs.docker.com/engine/reference/commandline/run/#access-an-nvidia-gpu)
