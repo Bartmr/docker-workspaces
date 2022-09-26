@@ -33,7 +33,8 @@ RUN apt-get install -y build-essential
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID arduino && useradd --uid $USER_UID --gid $USER_GID --groups dialout --create-home arduino
+RUN groupadd --gid $USER_GID arduino && useradd --uid $USER_UID --gid $USER_GID --groups dialout,sudo --create-home arduino
+RUN echo "arduino:Mb921" | chpasswd
 
 RUN wget -O /home/arduino/arduino-ide.AppImage https://downloads.arduino.cc/arduino-ide/arduino-ide_2.0.0-rc9.2_Linux_64bit.AppImage
 RUN chmod +x /home/arduino/arduino-ide.AppImage
@@ -42,7 +43,9 @@ COPY ./arduino-ide-initial-settings.json /home/arduino/.arduinoIDE/settings.json
 RUN chown -R arduino:arduino /home/arduino/.arduinoIDE
 
 # https://github.com/Rahix/avr-hal
-RUN apt-get install -y avr-libc gcc-avr pkg-config avrdude libudev-dev
+RUN apt-get update && apt-get install -y avr-libc gcc-avr pkg-config avrdude libudev-dev
+
+RUN apt-get install -y sudo
 
 USER arduino
 WORKDIR /home/arduino

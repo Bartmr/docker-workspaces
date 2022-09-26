@@ -35,7 +35,7 @@
     "--network", "host",
     "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
     "-e", "DISPLAY=unix${localEnv:DISPLAY}",
-    "--device", "/dev/ttyACM0"
+    "--device-cgroup-rule", "c *:* rmw"
   ],
 
   // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
