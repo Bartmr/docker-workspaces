@@ -60,5 +60,3 @@ RUN ./arduino-ide.AppImage --appimage-extract
 
 ENV USER=arduino
 ENV RAVEDUDE_PORT=/dev/ttyACM0
-
-CMD ["/home/arduino/squashfs-root/arduino-ide", "--no-sandbox"]

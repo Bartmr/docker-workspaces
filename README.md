@@ -53,3 +53,4 @@ Append these to `~/.bashrc`
 
 - [Using dynamically created devices (--device-cgroup-rule)](https://docs.docker.com/engine/reference/commandline/run/#-using-dynamically-created-devices---device-cgroup-rule)
 - [Access an NVIDIA GPU](https://docs.docker.com/engine/reference/commandline/run/#access-an-nvidia-gpu)
+- <https://blog.jessfraz.com/post/docker-containers-on-the-desktop/>

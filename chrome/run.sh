@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
+set -e
 
-# https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
+docker_workspaces_dir="$(dirname "$(dirname "$(realpath $0)")")"
+chrome_workspace_dir="$(dirname "$(realpath $0)")"
 
-
-mkdir -p ./Downloads
-chmod go+rw ./Downloads
+mkdir -p "$chrome_workspace_dir/Downloads"
+chmod go+rw "$chrome_workspace_dir/Downloads"
 
 chmod go+r ~/.config/pulse/cookie
 
@@ -24,10 +25,10 @@ fi
 # or
 # --disable-dev-shm-usage
 
-../shared/run.sh chrome \
+"$docker_workspaces_dir/shared/run.sh" chrome \
     --privileged \
     --net host \
-    -v $(pwd)/Downloads:/home/chrome/Downloads \
+    -v "$chrome_workspace_dir/Downloads:/home/chrome/Downloads" \
     -v chrome-data:/home/chrome/chrome-data \
     -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
     --volume=/tmp/pulse-socket:/tmp/pulse-socket:ro \

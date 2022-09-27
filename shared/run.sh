@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+docker_workspaces_dir="$(dirname "$(dirname "$(realpath $0)")")"
+
 name=""
 run_args=()
 
@@ -37,10 +39,10 @@ fi
 #
 #
 
-mkdir -p "../$name/bin"
+mkdir -p "$docker_workspaces_dir/$name/bin"
 
-mkdir -p "../$name/data"
-chmod go+rw "../$name/data"
+mkdir -p "$docker_workspaces_dir/$name/data"
+chmod go+rw "$docker_workspaces_dir/$name/data"
 
 #
 #
@@ -59,8 +61,8 @@ then
   docker run \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -e DISPLAY=unix$DISPLAY \
-    -v $(pwd)/data:/home/$name/docker-data \
-    -v $(pwd)/bin:/home/$name/docker-bin \
+    -v "$docker_workspaces_dir/$name/data:/home/$name/docker-data" \
+    -v "$docker_workspaces_dir/$name/bin:/home/$name/docker-bin" \
     ${run_args[@]} \
     --name $name \
     $name

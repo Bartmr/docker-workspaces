@@ -2,7 +2,7 @@
 
 # https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
 
-docker inspect "ubuntu-with-gui:latest" > /dev/null 2>&1
+docker inspect "ubuntu:latest" > /dev/null 2>&1
 LAST_RESULT=$?
 
 set -e
@@ -12,7 +12,7 @@ then
   docker build \
     --build-arg USER_UID=$(id -u) \
     --build-arg USER_GID=$(id -g) \
-    --tag ubuntu-with-gui .
+    --tag ubuntu .
 fi
 
 mkdir -p ./data
@@ -22,7 +22,7 @@ xhost +"local:docker@"
 
 set +e
 
-docker container inspect ubuntu-with-gui  > /dev/null 2>&1
+docker container inspect ubuntu  > /dev/null 2>&1
 LAST_RESULT=$?
 
 set -e
@@ -35,8 +35,8 @@ then
     -v $(pwd)/bin:/usr/src/app/bin \
     -v $(pwd)/data:/home/ubuntu/data \
     --device /dev/dri \
-    --name ubuntu-with-gui \
-    ubuntu-with-gui
+    --name ubuntu \
+    ubuntu
 else
-  docker start -i ubuntu-with-gui
+  docker start -i ubuntu
 fi
