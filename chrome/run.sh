@@ -29,8 +29,8 @@ fi
     --privileged \
     --net host \
     -v "$chrome_workspace_dir/Downloads:/home/chrome/Downloads" \
-    -v chrome-data:/home/chrome/chrome-data \
-    -v chrome-keyring-data:/home/chrome/.local/share/keyrings \
+    -v bartmr-docker-workspaces-chrome-data:/home/chrome/chrome-data \
+    -v bartmr-docker-workspaces-chrome-keyring-data:/home/chrome/.local/share/keyrings \
     --volume=/tmp/pulse-socket:/tmp/pulse-socket:ro \
     -v ~/.config/pulse/cookie:/tmp/pulseaudio_cookie:ro \
     --group-add audio \

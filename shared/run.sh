@@ -30,10 +30,7 @@ set -e
 
 if [ $LAST_RESULT -ne 0 ]
 then
-  docker build \
-    --build-arg USER_UID=$(id -u) \
-    --build-arg USER_GID=$(id -g) \
-    --tag "bartmr-docker-workspaces/$name" "../$name"
+  $docker_workspaces_dir/shared/rebuild.sh $name
 fi
 
 #
@@ -51,7 +48,7 @@ xhost +"local:docker@"
 
 set +e
 
-docker container inspect $name  > /dev/null 2>&1
+docker container inspect "bartmr-docker-workspaces-$name"  > /dev/null 2>&1
 LAST_RESULT=$?
 
 set -e
@@ -64,8 +61,8 @@ then
     -v "$docker_workspaces_dir/$name/data:/home/$name/docker-data" \
     -v "$docker_workspaces_dir/$name/bin:/home/$name/docker-bin" \
     ${run_args[@]} \
-    --name $name \
+    --name "bartmr-docker-workspaces-$name" \
     "bartmr-docker-workspaces/$name"
 else
-  docker start $name -a
+  docker start "bartmr-docker-workspaces-$name" -a
 fi

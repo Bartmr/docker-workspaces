@@ -7,12 +7,6 @@ Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
   - encrypts passwords and cookies with the help of an also dockerized gnome-keychain
   - works with your headphones
 
-## Miscellaneous
-### Useful aliases
-Append these to `~/.bashrc`
-
-- `alias prune-volumes="docker volume list --filter dangling=true --format \"{{.Name}}\" | grep -v -e \"chrome-data\" -e \"chrome-keyring-data\" | xargs docker volume rm"`
-
 ## Development
 
 ### Useful snippets

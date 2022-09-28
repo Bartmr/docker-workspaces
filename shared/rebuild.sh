@@ -2,7 +2,7 @@
 
 name=$1
 
-docker container rm $name
+docker container rm "bartmr-docker-workspaces-$name"
 
 set -e 
   
