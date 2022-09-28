@@ -23,7 +23,7 @@ done
 
 set +e
 
-docker inspect "$name:latest" > /dev/null 2>&1
+docker inspect "bartmr-docker-workspaces/$name:latest" > /dev/null 2>&1
 LAST_RESULT=$?
 
 set -e
@@ -33,7 +33,7 @@ then
   docker build \
     --build-arg USER_UID=$(id -u) \
     --build-arg USER_GID=$(id -g) \
-    --tag $name "../$name"
+    --tag "bartmr-docker-workspaces/$name" "../$name"
 fi
 
 #
@@ -65,7 +65,7 @@ then
     -v "$docker_workspaces_dir/$name/bin:/home/$name/docker-bin" \
     ${run_args[@]} \
     --name $name \
-    $name
+    "bartmr-docker-workspaces/$name"
 else
   docker start $name -a
 fi
