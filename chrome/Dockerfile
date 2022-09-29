@@ -30,6 +30,10 @@ RUN apt-get install -y \
 RUN apt-get install -y --no-install-recommends \
 	fonts-noto fonts-noto-color-emoji
 
+RUN apt-get update && apt-get install -y sudo
+
+RUN apt-get update && apt-get install -y sqlite3
+
 #
 #
 
@@ -41,12 +45,16 @@ RUN apt-get update && apt-get upgrade -y --no-install-recommends
 #
 #
 
-COPY pulse-client.conf /etc/pulse/client.conf
 
 ARG TZ
 ENV TZ=$TZ
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get install -y tzdata
+
+#
+#
+
+COPY pulse-client.conf /etc/pulse/client.conf
 
 #
 #
