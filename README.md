@@ -48,3 +48,6 @@ Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
 - [Using dynamically created devices (--device-cgroup-rule)](https://docs.docker.com/engine/reference/commandline/run/#-using-dynamically-created-devices---device-cgroup-rule)
 - [Access an NVIDIA GPU](https://docs.docker.com/engine/reference/commandline/run/#access-an-nvidia-gpu)
 - <https://blog.jessfraz.com/post/docker-containers-on-the-desktop/>
+- https://docs.docker.com/engine/reference/builder/#buildkit
+- https://leimao.github.io/blog/Docker-Container-Audio/
+- https://github.com/docker/buildx
