@@ -51,3 +51,26 @@ Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
 - https://docs.docker.com/engine/reference/builder/#buildkit
 - https://leimao.github.io/blog/Docker-Container-Audio/
 - https://github.com/docker/buildx
+
+### To think about
+
+- Using X11 in Mac
+  - taken from <https://github.com/blacktop/docker-ghidra/blob/master/README.md>
+
+  1. Install XQuartz `brew install xquartz`
+  2. Install socat `brew install socat`
+  3. `open -a XQuartz` and make sure you **"Allow connections from network clients"** (in XQuartz > Preferences... > Security)
+  4. Now add the IP using Xhost with: `xhost + 127.0.0.1` or `xhost + $(ipconfig getifaddr en0)`
+  5. Start socat `socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\"`
+  6. Start up Ghidra
+
+  ```bash
+  $ docker run --init -it --rm \
+              --name ghidra \
+              --cpus 2 \
+              --memory 4g \
+              -e MAXMEM=4G \
+              -e DISPLAY=host.docker.internal:0 \
+              -v /path/to/samples:/samples \
+              -v /path/to/projects:/root \
+              blacktop/ghidra
