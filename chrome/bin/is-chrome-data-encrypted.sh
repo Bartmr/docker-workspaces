@@ -7,7 +7,15 @@ last_modified_password=$(sqlite3 ~/chrome-data/Default/'Login Data' "SELECT pass
 
 if [[ "$last_modified_password" != v11* ]]
 then
-  echo "!!! Chrome data is NOT being correctly encrypted !!!"
+  echo "!!! Chrome passwords are NOT being correctly encrypted !!!"
+  exit 1
+fi
+
+last_modified_cookie=$(sqlite3 ~/chrome-data/Default/'Cookies' "SELECT encrypted_value FROM cookies ORDER BY last_update_utc DESC LIMIT 1;")
+
+if [[ "$last_modified_cookie" != v11* ]]
+then
+  echo "!!! Chrome cookies are NOT being correctly encrypted !!!"
   exit 1
 fi
 
