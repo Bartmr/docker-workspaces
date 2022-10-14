@@ -62,7 +62,7 @@ COPY pulse-client.conf /etc/pulse/client.conf
 ARG USER_UID
 ARG USER_GID
 
-RUN groupadd --gid $USER_GID chrome && useradd --uid $USER_UID --gid $USER_GID --groups audio,video,sudo --create-home chrome
+RUN groupadd --gid $USER_GID chrome && useradd --shell /bin/bash --uid $USER_UID --gid $USER_GID --groups audio,video,sudo --create-home chrome
 RUN echo "chrome:Mb921" | chpasswd
 
 USER chrome
