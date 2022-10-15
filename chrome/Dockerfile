@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends ubuntu-desktop
 
-RUN apt-get update
+RUN apt-get install -y sudo
 
 RUN apt-get install -y --no-install-recommends \
 	apt-transport-https \
@@ -18,21 +18,7 @@ RUN apt-get install -y --no-install-recommends \
 	libcanberra-gtk-module \
 	libcanberra-gtk3-module
 
-RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
-	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-
-RUN apt-get update
-
-RUN apt-get install -y \
-	google-chrome-stable \
-	--no-install-recommends
-
-RUN apt-get install -y --no-install-recommends \
-	fonts-noto fonts-noto-color-emoji
-
-RUN apt-get update && apt-get install -y sudo
-
-RUN apt-get update && apt-get install -y sqlite3
+RUN apt-get install -y sqlite3
 
 #
 #
@@ -50,6 +36,22 @@ ARG TZ
 ENV TZ=$TZ
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get install -y tzdata
+
+#
+# UNSAFE CHROME APT REPO STARTS HERE
+#
+
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
+	&& echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+
+RUN apt-get update
+
+RUN apt-get install -y \
+	google-chrome-stable \
+	--no-install-recommends
+
+RUN apt-get install -y --no-install-recommends \
+	fonts-noto fonts-noto-color-emoji
 
 #
 #
