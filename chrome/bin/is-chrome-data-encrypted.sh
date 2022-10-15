@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-profile_directory=~/chrome-data/Default
+profile_directory="/home/chrome/chrome-data/Default"
+
+echo $profile_directory
 
 #
 #
 
-total_logins=$(sqlite3 ~/chrome-data/Default/'Login Data' "SELECT COUNT(*) FROM logins")
-total_encrypted_logins=$(sqlite3 ~/chrome-data/Default/'Login Data' "SELECT COUNT(*) FROM logins WHERE cast(password_value AS TEXT) LIKE 'v11%'")
-total_empty_logins=$(sqlite3 ~/chrome-data/Default/'Login Data' "SELECT COUNT(*) FROM logins WHERE cast(password_value AS TEXT) = ''")
+total_logins=$(sqlite3 "$profile_directory/Login Data" "SELECT COUNT(*) FROM logins")
+total_encrypted_logins=$(sqlite3 "$profile_directory/Login Data" "SELECT COUNT(*) FROM logins WHERE cast(password_value AS TEXT) LIKE 'v11%'")
+total_empty_logins=$(sqlite3 "$profile_directory/Login Data" "SELECT COUNT(*) FROM logins WHERE cast(password_value AS TEXT) = ''")
 
 if [ "$total_logins" == "0" ]
 then
@@ -42,9 +44,9 @@ echo "-----"
 #
 #
 
-total_cookies=$(sqlite3 ~/chrome-data/Default/'Cookies' "SELECT COUNT(*) FROM cookies")
-total_encrypted_cookies=$(sqlite3 ~/chrome-data/Default/'Cookies' "SELECT COUNT(*) FROM cookies WHERE cast(encrypted_value AS TEXT) LIKE 'v11%'")
-total_empty_cookies=$(sqlite3 ~/chrome-data/Default/'Cookies' "SELECT COUNT(*) FROM cookies WHERE cast(encrypted_value AS TEXT) = ''")
+total_cookies=$(sqlite3 "$profile_directory/Cookies" "SELECT COUNT(*) FROM cookies")
+total_encrypted_cookies=$(sqlite3 "$profile_directory/Cookies" "SELECT COUNT(*) FROM cookies WHERE cast(encrypted_value AS TEXT) LIKE 'v11%'")
+total_empty_cookies=$(sqlite3 "$profile_directory/Cookies" "SELECT COUNT(*) FROM cookies WHERE cast(encrypted_value AS TEXT) = ''")
 
 if [ "$total_cookies" == "0" ]
 then
