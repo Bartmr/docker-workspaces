@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+shopt -s inherit_errexit
 
 cd $(dirname $0)
 

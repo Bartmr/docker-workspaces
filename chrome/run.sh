@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
+shopt -s inherit_errexit
 
 docker_workspaces_dir="$(dirname "$(dirname "$(realpath $0)")")"
 chrome_workspace_dir="$(dirname "$(realpath $0)")"
