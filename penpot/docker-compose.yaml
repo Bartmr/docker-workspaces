@@ -55,7 +55,6 @@ services:
 
   penpot-postgres:
     image: "postgres:13"
-    restart: always
     stop_signal: SIGINT
 
     environment:
@@ -72,6 +71,5 @@ services:
 
   penpot-redis:
     image: redis:6
-    restart: always
     networks:
       - penpot
