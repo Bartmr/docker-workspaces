@@ -9,6 +9,10 @@ Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
 
 ## Development
 
+### Practices
+
+- Enable the `sudo` command in the containers so you can easily update the software in the containers with `sudo apt update && sudo apt upgrade`, while using said software and not needing to rebuild and restart the container.
+
 ### Useful snippets
 
 - Upgrade all packages without rebuilding the whole image and any base images that it uses
