@@ -2,4 +2,8 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
-sudo apt-get update && sudo apt-get upgrade
+apt-mark hold tzdata
+
+apt-get update && sudo apt-get upgrade -y
+
+apt-mark unhold tzdata
