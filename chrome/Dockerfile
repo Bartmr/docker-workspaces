@@ -18,7 +18,7 @@ RUN apt-get install -y --no-install-recommends \
 	libcanberra-gtk-module \
 	libcanberra-gtk3-module
 
-RUN apt-get install -y sqlite3
+RUN apt-get install -y sqlite3 jq
 
 #
 #
