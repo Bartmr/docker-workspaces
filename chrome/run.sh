@@ -38,5 +38,5 @@ fi
     -v /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro \
     -v /etc/timezone:/etc/timezone:ro \
     -v /etc/localtime:/etc/localtime:ro \
-    --shm-size=8g \
+    -v /dev/shm:/dev/shm \
     --name chrome
