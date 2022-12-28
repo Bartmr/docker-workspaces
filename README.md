@@ -14,6 +14,8 @@ Contrary to <https://github.com/jessfraz/dockerfiles/>, docker-workspaces:
 - Enable the `sudo` command in the containers so you can easily update the software in the containers with `sudo apt update && sudo apt upgrade`, while using said software and not needing to rebuild and restart the container.
 - Always use a non-root user as early as possible in Dockerfile.
   - Make sure all Docker containers run with a non-root user
+- Try to use Docker base images based on the host operating system
+  - Example: if you use Ubuntu 22.04, you should use `FROM ubuntu:22.04` in your Dockerfiles
 
 ### Useful snippets
 

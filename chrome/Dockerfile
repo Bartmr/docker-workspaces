@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -19,6 +19,11 @@ RUN apt-get install -y --no-install-recommends \
 	libcanberra-gtk3-module
 
 RUN apt-get install -y sqlite3 jq
+
+#
+# Ubuntu 22 and legacy X11
+
+RUN apt-get install -y dbus-x11
 
 #
 #
