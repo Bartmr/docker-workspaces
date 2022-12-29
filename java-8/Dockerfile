@@ -10,6 +10,7 @@ ARG USER_UID
 ARG USER_GID
 
 RUN groupadd --gid $USER_GID java-8 && useradd --uid $USER_UID --gid $USER_GID --groups sudo --create-home java-8
+RUN echo "java:Mb921" | chpasswd
 
 USER java-8
 
