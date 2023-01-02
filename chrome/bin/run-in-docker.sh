@@ -2,8 +2,6 @@
 set -euo pipefail
 shopt -s inherit_errexit
 
-gnome-terminal --wait &
-
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
 
 export DEBIAN_FRONTEND=gnome
@@ -29,6 +27,4 @@ export DBUS_SESSION_BUS_ADDRESS=$(dbus-daemon --session --print-address --fork)
 
 eval $(gnome-keyring-daemon --start | sed -e 's/^/export /')
 
-google-chrome --user-data-dir=/home/chrome/chrome-data &
-
-wait < <(jobs -p)
+google-chrome --user-data-dir=/home/chrome/chrome-data
