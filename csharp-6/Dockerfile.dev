@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:6.0
+
+ARG USER_UID
+ARG USER_GID
+
+RUN groupadd --gid $USER_GID vscode && useradd --uid $USER_UID --gid $USER_GID --create-home vscode
+
+USER vscode
+
+WORKDIR /home/vscode
