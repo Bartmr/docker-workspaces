@@ -1,11 +1,8 @@
 FROM node:16-buster
 
-VOLUME /home/node
-
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-ENV PATH="${PATH}:/home/node/.npm-global/bin"
-
 RUN apt-get update \
   && apt-get install -y nano
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 USER node
