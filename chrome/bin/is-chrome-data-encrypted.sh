@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-shopt -s inherit_errexit
+
 
 section_colors="\0033[1;33;100m"
 success_colors="\0033[1;30;102m"

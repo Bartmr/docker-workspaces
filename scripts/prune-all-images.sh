@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-shopt -s inherit_errexit
+
 
 # Use [[ $# -gt 0 ]] to test existence of positional parameters.
 

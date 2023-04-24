@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-shopt -s inherit_errexit
+
 
 
 jq ".account_info[0].email" "/home/chrome/chrome-data/Default/Preferences"
